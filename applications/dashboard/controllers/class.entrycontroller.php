@@ -960,6 +960,11 @@ class EntryController extends Gdn_Controller {
     public function signOut($TransientKey = "", $Override = "0") {
         $this->checkOverride('SignOut', $this->target(), $TransientKey);
 
+        print_r([
+            'ValidTransient' => Gdn::session()->validateTransientKey($TransientKey),
+            'IsPostBack' => $this->Form->isPostBack()
+        ]);
+
         if (Gdn::session()->validateTransientKey($TransientKey) || $this->Form->isPostBack()) {
             $User = Gdn::session()->User;
 
